@@ -16,5 +16,10 @@ public class UserServiceImpl implements IUserService{
 		return iudao.findUser(username, password);
 		
 	}
+	@Override
+	public void saveUser(User user) {
+		iudao.saveUser(user);
+		
+	}
 	
 }

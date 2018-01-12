@@ -32,5 +32,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
         user.setUsername(resultSet.getString("username"));
         return  user;
  }
+
+	@Override
+	public void saveUser(User user) {
+		String sql="insert into user values(?,?)";
+		this.getJdbcTemplate().update(sql, user.getUsername(),user.getPassword());
+		
+	}
 	
 }

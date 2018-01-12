@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/jsp/order_action.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/regist.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/registSuccess.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/web.xml=UTF-8

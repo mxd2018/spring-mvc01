@@ -21,10 +21,43 @@
         
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-        ">
-	<context:component-scan base-package="com.mxd"></context:component-scan>
-<!-- 	<context:property-placeholder location="classpath:db.properties"/>
+       ">
 	
+	<context:component-scan base-package="com.mxd.web"></context:component-scan>
+	<mvc:annotation-driven/>
+	
+	<!--静态资源放行，测试失败？？？？？？  -->
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	
+	<!--拦截器  -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/mvc/json2"/>
+			<bean class="com.qianfeng.interceptor.MyInterceptors"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!--视图解析器  -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+            id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!--上传文件  -->
+	<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+	p:defaultEncoding="UTF-8"
+	p:maxUploadSize="5242880"
+	p:uploadTempDir="file:/d:/temp"
+	/>
+
+
+<!-- 去掉注释就是将springmvc 和spring jdbc整合在一个spring xml里，因为sss是一家的	
+
+	<context:property-placeholder location="classpath:db.properties"/>
 	
 	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" p:jdbcUrl="${jdbc.jdbcUrl}"
               p:driverClass="${jdbc.driverClass}"
@@ -39,17 +72,6 @@
 	<bean name="userDao" class="com.mxd.dao.impl.UserDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean> -->
-	
-	
-	<mvc:annotation-driven/>
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
-            id="internalResourceViewResolver">
-        <!-- 前缀 -->
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <!-- 后缀 -->
-        <property name="suffix" value=".jsp" />
-    </bean>
 </beans>
 
 
